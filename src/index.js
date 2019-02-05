@@ -1,17 +1,22 @@
 /* eslint-disable import/prefer-default-export */
-import React from 'react';
+import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
-import App from './Components/App';
+import TodosContext from './context';
+import todosReducer from './reducer';
+
+import TodoList from './components/TodoList';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const UserContext = React.createContext({});
+const App = () => {
+  const initialState = useContext(TodosContext);
+  const [state, dispatch] = useReducer(todosReducer, initialState);
 
-const user = 'test context';
+  return (
+    <TodosContext.Provider value={{ state, dispatch }}>
+      <TodoList />
+    </TodosContext.Provider>
+  );
+};
 
-ReactDOM.render(
-  <UserContext.Provider value={user}>
-    <App />
-  </UserContext.Provider>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));
