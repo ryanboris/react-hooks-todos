@@ -1,0 +1,7 @@
+.strikeout {
+  text-decoration-line: line-through;
+}
+
+span {
+  cursor: pointer;
+}

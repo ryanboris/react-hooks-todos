@@ -3,10 +3,8 @@ import React, { useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import TodosContext from './context';
 import todosReducer from './reducer';
-
 import TodoList from './components/TodoList';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from './components/Form';
 
 const App = () => {
   const initialState = useContext(TodosContext);
@@ -15,6 +13,7 @@ const App = () => {
   return (
     <TodosContext.Provider value={{ state, dispatch }}>
       <TodoList />
+      <Form />
     </TodosContext.Provider>
   );
 };
