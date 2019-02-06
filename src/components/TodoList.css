@@ -1,7 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .strikeout {
   text-decoration-line: line-through;
+  text-decoration-color: red;
+}
+
+.strikeout::after {
+  border-bottom: 0.125em solid red;
+  content: '';
+  left: 0;
+  margin-top: calc(0.125em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+h1 {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 4rem;
 }
 
 span {
   cursor: pointer;
+  position: absolute;
+  right: 50%;
+  transform: translate(50%);
+  align-self: center;
+  font-size: 1.3rem;
+  display: inline-block;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 20px;
+  padding: 20px;
+  list-style-type: none;
+}
+
+li {
+  margin: 30px;
+  border: 2px solid black;
+  width: 70vw;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  font-family: 'Permanent Marker', cursive;
 }

@@ -33,6 +33,26 @@ export default function reducer(state, action) {
         ...state,
         todos: [...state.todos, buildTodo]
       };
+
+    case 'SET_CURRENT_TODO':
+      return {
+        ...state,
+        currentTodo: action.payload
+      };
+
+    case 'UPDATE_TODO':
+      const updatedTodo = { ...state.currentTodo, text: action.payload };
+      const index = state.todos.findIndex(
+        todo => todo.id === state.currentTodo.id
+      );
+      return {
+        ...state,
+        todos: [
+          ...state.todos.slice(0, index),
+          updatedTodo,
+          ...state.todos.slice(index + 1)
+        ]
+      };
     default:
       return state;
   }
