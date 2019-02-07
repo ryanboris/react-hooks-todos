@@ -15,6 +15,8 @@ export default function Form() {
   useEffect(() => {
     if (currentTodo.text) {
       setTodo(currentTodo.text);
+    } else {
+      setTodo('');
     }
   }, [currentTodo.id]);
 

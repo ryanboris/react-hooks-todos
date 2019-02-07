@@ -18,12 +18,21 @@ export default function reducer(state, action) {
       const filteredTodos = state.todos.filter(
         todo => todo.id !== action.payload.id
       );
+      const isRemovedTodo =
+        state.currentTodo.id === action.payload.id ? {} : state.currentTodo;
       return {
         ...state,
+        currentTodo: isRemovedTodo,
         todos: filteredTodos
       };
 
     case 'ADD_TODO':
+      if (!action.payload) {
+        return state;
+      }
+      if (state.todos.findIndex(todo => todo.text === action.payload) > -1) {
+        return state;
+      }
       const buildTodo = {
         id: uuidv4(),
         text: action.payload,
