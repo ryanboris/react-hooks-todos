@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import TodosContext from '../context';
-import Form from './Form';
+import Button from '@material-ui/core/Button';
 
-import './TodoList.css';
+import Form from './Form';
+import TodosContext from '../context';
 
 export default function TodoList() {
   const { state, dispatch } = useContext(TodosContext);
@@ -17,14 +17,16 @@ export default function TodoList() {
   }, []);
 
   return (
-    <div className='container'>
+    <>
       {state.todos.length - numberCompleted > 1 && (
         <h1>{`${state.todos.length - numberCompleted} items todo`}</h1>
       )}
       {state.todos.length - numberCompleted === 1 && <h1>1 item todo</h1>}
       {state.todos.length - numberCompleted === 0 && <h1>All done!</h1>}
+
       <Form />
-      <ul>
+
+      <ul style={{ listStyleType: 'none' }}>
         {state.todos.map(todo => (
           <li key={todo.id}>
             <span
@@ -35,14 +37,17 @@ export default function TodoList() {
             >
               {todo.text}
             </span>
-            <button
+
+            <Button
+              variant='contained'
+              color='primary'
               type='button'
               onClick={() =>
                 dispatch({ type: 'SET_CURRENT_TODO', payload: todo })
               }
-            >
-              <img src='https://icon.now.sh/edit/000000' alt='edit icon' />
-            </button>
+            />
+            <img src='https://icon.now.sh/edit/000000' alt='edit icon' />
+
             <button
               type='button'
               onClick={() => dispatch({ type: 'REMOVE_TODO', payload: todo })}
@@ -52,6 +57,6 @@ export default function TodoList() {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
